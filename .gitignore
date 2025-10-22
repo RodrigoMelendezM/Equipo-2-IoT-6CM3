@@ -1,0 +1,24 @@
+# ===== Archivos de compilación =====
+*.bin
+*.elf
+*.hex
+*.eep
+*.map
+
+# ===== Carpetas generadas =====
+build/
+.cache/
+.temp/
+
+# ===== Sistema =====
+.DS_Store
+Thumbs.db
+
+# ===== Arduino data y backups =====
+*.bak
+*.tmp
+*.log
+
+# ===== Archivos específicos de plataformas =====
+*.d
+*.dep
