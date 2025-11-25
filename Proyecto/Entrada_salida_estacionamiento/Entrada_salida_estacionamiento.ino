@@ -2,11 +2,11 @@
 
 const int Digital_Pin = 32;
 const int Digital_Pin_2 = 25;
-int Bandera = 0; // 1 = Límite alcanzado, 0 = Límite no alcanzado
+bool Bandera = false; // 1 = Límite alcanzado, 0 = Límite no alcanzado
 int Carros = 0;
 Servo SERVOM;
 
-void CarrosNum(int Carros) {
+void CarrosNum() {
   Serial.printf("Carros dentro del estacionamiento: %d\n", Carros);
 }
 
@@ -43,13 +43,13 @@ void loop() {
   }
 
   if (Carros == 6) { // Se restringe el acceso
-    Bandera = 1;
+    Bandera = true;
   }
 
   if (Carros < 6 && Carros >= 0) { // Se concede el acceso
-    Bandera = 0;
+    Bandera = false;
   }
 
-  CarrosNum(Carros);
+  CarrosNum();
   delay(1000);
 }
