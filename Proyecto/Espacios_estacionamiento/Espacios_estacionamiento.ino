@@ -11,10 +11,10 @@
 
 BlynkTimer timer;
 
-//char ssid[] = "EB_WiFiB";
-//char pass[] = "FamEB2023?";
-char ssid[] = "Bryan Alexis's Galaxy A33 5G";
-char pass[] = "vtwv7692";
+char ssid[] = "EB_WiFiB";
+char pass[] = "FamEB2023?";
+//char ssid[] = "Bryan Alexis's Galaxy A33 5G";
+//char pass[] = "vtwv7692";
 //char ssid[] = "WiFi-IPN";
 //char pass[] = ""; // Sin contraseña
 
