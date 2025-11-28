@@ -15,8 +15,8 @@ BlynkTimer timer;
 Servo SERVOM;
 
 // variables globales
-char ssid[] = "POCO C65";
-char password[] = "jasonmomoa";
+char ssid[] = "XXXX";
+char password[] = "XXXX";
 
 bool bloqueado = false;
 bool disponibilidad = true;
@@ -24,8 +24,6 @@ bool disponibilidad = true;
 // para el filtro del TCRT5000
 int ultimo_estado_entrada = HIGH;
 int contador_entrada = 0;
-int ultimo_estado_salida = HIGH;
-int contador_salida = 0;
 
 // para el servo
 int posicion_actual = 20; // posición real del servo
@@ -38,7 +36,7 @@ int carros = 0;
 #define SENSOR_SALIDA 22
 #define MAX_CARROS 6
 
-void mover_servo() {
+void mover_servo() { // para mover el servo de forma suave
   if (posicion_actual < posicion_objetivo) {
     posicion_actual += 5; // velocidad de subida
     if (posicion_actual > posicion_objetivo) posicion_actual = posicion_objetivo; // llego al objetivo
@@ -77,31 +75,7 @@ void entrada(int lectura_entrada) {
   ultimo_estado_entrada = lectura_entrada;
 }
 
-void salida(int lectura_salida) {
-  if (!carros <= MAX_CARROS) {
-    return;
-  }
-  // filtro por repeticiones para el servo
-  if (lectura_salida == ultimo_estado_salida) {
-    contador_salida++;
-  } else {
-    contador_salida = 0;
-  }
-
-  if (contador_salida >= 3) { // 3 lecturas seguidas
-    if (lectura_salida == LOW) {
-      posicion_objetivo = 110;
-      Blynk.virtualWrite(V7, "Carro saliendo...");
-    } else {
-      posicion_objetivo = 20;
-      Blynk.virtualWrite(V7, "Sin cambios");
-    }
-  }
-
-  ultimo_estado_salida = lectura_salida;
-}
-
-void control_estacionamiento() {
+void control_estacionamiento() { // control básico para un solo sensor
   if (bloqueado) { // si esta bloqueado no hace nada
     posicion_objetivo = 20; // siempre que se bloquea va a 0
     mover_servo();
@@ -110,11 +84,8 @@ void control_estacionamiento() {
   }
 
   int lectura_entrada = digitalRead(SENSOR_ENTRADA);
-  int lectura_salida = digitalRead(SENSOR_SALIDA);
   
   entrada(lectura_entrada);
-  salida(lectura_salida);
-
   mover_servo();
 }
 
@@ -138,12 +109,11 @@ void setup() {
   SERVOM.attach(17);
   pinMode(LED_INDICADOR, OUTPUT);
   pinMode(SENSOR_ENTRADA, INPUT);
-  pinMode(SENSOR_SALIDA, INPUT);
   Serial.begin(115200);
 
   // blynk
   Blynk.begin(BLYNK_AUTH_TOKEN, ssid, password);
-  timer.setInterval(50L, control_estacionamiento);
+  timer.setInterval(100L, control_estacionamiento);
 }
 
 void loop() {
