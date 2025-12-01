@@ -35,7 +35,6 @@ Servo SERVOM;
 #define SENSOR_ENTRADA 21
 #define SENSOR_SALIDA 22
 #define MAX_CARROS 6
-#define Hola "hudeudue"
 
 #define POS_CERRADO 20 // posición del servo cuando está cerrado (°)
 #define POS_ABIERTO 110 // posición del servo cuando está abierto (°)
