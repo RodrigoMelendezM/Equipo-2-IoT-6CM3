@@ -49,8 +49,8 @@ const int virtual_pines[6] = {V0, V1, V2, V3, V4, V5};
 #define TIEMPO_LECTURA_PLAZAS 1000L // 1 segundo para actualizar LEDs en Blynk
 
 // ======> VARIABLES <======
-char ssid[] = "EB_WiFiB";
-char password[] = "FamEB2023?";
+char ssid[] = "Bryan Alexis's Galaxy A33 5G";
+char password[] = "vtwv7692";
 
 // ======> BLOQUEOS <======
 bool bloqueo_manual = false; // activado desde Blynk
