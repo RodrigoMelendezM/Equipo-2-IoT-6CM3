@@ -19,7 +19,7 @@
  */
 // ======> INFORMACIÓN PARA LA CONEXIÓN CON BLYNK <======
 #define BLYNK_TEMPLATE_ID "TMPL27qOzqAiv"
-#define BLYNK_TEMPLATE_NAME "Estacionamiento-IoT"
+#define BLYNK_TEMPLATE_NAME "Estacionamiento IoT"
 #define BLYNK_AUTH_TOKEN "uIDV6IpETIRlHTezdR6IIqrZpoJSGW1X"
 
 #include <WiFi.h>
@@ -161,7 +161,7 @@ void controlar_estacionamiento() {
   if (!bloqueado && contador_entrada >= LECTURAS_FILTRO) {
     if (!barrera_abierta) {
       abrir_barrera();
-      Blynk.virtualWrite(V7, "Carro ENTRANDO...");
+      Blynk.virtualWrite(V7, "Vehículo ENTRANDO...");
     }
 
     if (carros < MAX_CARROS) carros++;
@@ -188,7 +188,7 @@ void controlar_estacionamiento() {
   if (contador_salida >= LECTURAS_FILTRO) {
     if (!barrera_abierta) {
       abrir_barrera();
-      Blynk.virtualWrite(V7, "Carro SALIENDO...");
+      Blynk.virtualWrite(V7, "Vehículo SALIENDO...");
     }
 
     if (carros > 0) carros--;
@@ -213,18 +213,18 @@ void controlar_estacionamiento() {
 
 // -------------------- BLYNK MANUAL LOCK --------------------
 /*
- * Recibe datos desde Blynk, para el bloquei manual. 
+ * Recibe datos desde Blynk, para el bloqueo manual. 
  */
 BLYNK_WRITE(V6) {
   int estado = param.asInt(); // 1: bloquear, 0: desbloquear
 
   if (estado == 1) {
     bloqueo_manual = true;
-    Blynk.virtualWrite(V8, "Sistema BLOQUEADO (Manual)");
+    Blynk.virtualWrite(V8, "Entrada BLOQUEADA (Manual)");
   } else {
     bloqueo_manual = false;
     if (bloqueo_auto) Blynk.virtualWrite(V8, "Estacionamiento LLENO");
-    else Blynk.virtualWrite(V8, "Sistema DESBLOQUEADO (Manual)");
+    else Blynk.virtualWrite(V8, "Entrada DESBLOQUEADA (Manual)");
   }
 
   actualizar_bloqueo_general();
