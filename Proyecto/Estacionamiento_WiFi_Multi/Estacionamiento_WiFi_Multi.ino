@@ -83,12 +83,12 @@ int carros = 0;
  * Intenta conectarse a alguna de las redes WiFi ya definidas.
  */
 void conectarWifiMulti() {
-  Serial.println("\n===============================");
-  Serial.println("   Probando redes guardadas...");
-  Serial.println("===============================\n");
+  //Serial.println("\n===============================");
+  //Serial.println("   Probando redes guardadas...");
+  //Serial.println("===============================\n");
 
   for (int i = 0; i < 6; i++) {
-    Serial.printf("Intentando conectar a: %s\n", lista_ssid[i]);
+    //Serial.printf("Intentando conectar a: %s\n", lista_ssid[i]);
 
     WiFi.begin(lista_ssid[i], lista_pass[i]);
 
@@ -104,17 +104,17 @@ void conectarWifiMulti() {
     }
 
     if (conectado) {
-      Serial.printf("Conectado exitosamente a: %s\n", lista_ssid[i]);
-      Blynk.virtualWrite(V10, String("Conectado a: ") + WiFi.SSID());
+      //Serial.printf("Conectado exitosamente a: %s\n", lista_ssid[i]);
+      //Blynk.virtualWrite(V10, String("Conectado a: ") + WiFi.SSID());
       Blynk.config(BLYNK_AUTH_TOKEN);
       Blynk.connect(5000); // 5 segundos para conectar Blynk
       return;
     }
 
-    Serial.println("Fallo. Probando siguiente red...\n");
+    //Serial.println("Fallo. Probando siguiente red...\n");
   }
 
-  Serial.println("Ninguna red disponible. Reintentando...");
+  //Serial.println("Ninguna red disponible. Reintentando...");
 }
 
 // ==========================================
@@ -271,7 +271,9 @@ void setup() {
   pinMode(SENSOR_ENTRADA, INPUT);
   pinMode(SENSOR_SALIDA, INPUT);
 
-  for (int i = 0; i < 6; i++) pinMode(sensores_pines[i], INPUT);
+  for (int i = 0; i < 6; i++) {
+    pinMode(sensores_pines[i], INPUT);
+  }
 
   conectarWifiMulti(); // intenta conectarse a una red WiFi
 
