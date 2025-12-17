@@ -116,7 +116,7 @@ void abrir_barrera() {
 }
 
 /*
- * Cierra automáticamente de la barra después de que un auto sale o entra.
+ * Cierra automáticamente de la barra después de que un vehículo sale o entra.
 */
 void cierre_automatico() {
   if (barrera_abierta && (millis() - tiempo_apertura >= TIEMPO_ABIERTA)) {
